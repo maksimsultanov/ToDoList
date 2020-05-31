@@ -75,14 +75,28 @@ class ToDoListFrame(Frame):
         self.btn_exitApp.grid(column=0, row=9)  # append to the root window
         #######################################################################
         ##################create#menu#bar######################################
-        menubar = Menu(self.master)
-        self.master.config(menu=menubar)
-
-        fileMenu = Menu(menubar)
-        fileMenu.add_command(label="Exit", command=self.exitApp)
-        menubar.add_cascade(label="File", menu=fileMenu)
+        self.menu_bar = Menu(self.master)
+        self.master.config(menu=self.menu_bar)
         #######################################################################
-
+        self.file_menu = Menu(self.menu_bar)
+        self.file_menu.add_command(label="Выход", command=self.exitApp)
+        self.menu_bar.add_cascade(label="Файл", menu=self.file_menu)
+        #######################################################################
+        self.todo_menu = Menu(self.menu_bar)
+        self.todo_menu.add_command(label="Добавить дело", command=self.addDo)
+        self.todo_menu.add_command(label="Очистить список дел", command=self.clrList)
+        self.todo_menu.add_command(label="Редактировать дело", command=self.editDo)
+        self.todo_menu.add_command(label="Удалить дело", command=self.deleteDo)
+        self.todo_menu.add_command(label="Сортировать список по алфавиту", command=self.sortASC)
+        self.todo_menu.add_command(label="Сортировать список обратно алфавиту", command=self.sortDESC)
+        self.todo_menu.add_command(label="Случайное дело", command=self.chRnd)
+        self.todo_menu.add_command(label="Количество дел в списке", command=self.numTask)
+        self.menu_bar.add_cascade(label="Список дел", menu=self.todo_menu)
+        #######################################################################
+        self.help_menu = Menu(self.menu_bar)
+        self.help_menu.add_command(label="Справка")
+        self.help_menu.add_command(label="О программе")
+        self.menu_bar.add_cascade(label="Помощь", menu=self.help_menu)
         #######################################################################
         ##################add#create#or#reade#database#########################
         # set connection with db
