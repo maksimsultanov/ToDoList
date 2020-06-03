@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter.messagebox import *
 from EditDoDialogWindow import EditDoDialogWindow
 from cls_DBTodoList import DbWork
+from cls_AboutWindow import AboutWindow
 
 
 class ToDoListFrame(Frame):
@@ -95,7 +96,7 @@ class ToDoListFrame(Frame):
         #######################################################################
         self.help_menu = Menu(self.menu_bar)
         self.help_menu.add_command(label="Справка")
-        self.help_menu.add_command(label="О программе")
+        self.help_menu.add_command(label="О программе", command=self.about_window)
         self.menu_bar.add_cascade(label="Помощь", menu=self.help_menu)
         #######################################################################
         ##################add#create#or#reade#database#########################
@@ -256,3 +257,8 @@ class ToDoListFrame(Frame):
         """exit from the app"""
         # close the main window
         self.master.destroy()
+
+    def about_window(self):
+        """showing about dialog window"""
+        about_dialog = AboutWindow(self)
+        self.master.wait_window(about_dialog.top)
